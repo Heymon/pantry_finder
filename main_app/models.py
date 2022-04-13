@@ -9,14 +9,14 @@ class Pantry(models.Model):
 
     user=models.OneToOneField(User, on_delete=models.CASCADE)
     name=models.CharField(max_length=50, unique=True)
-    email=models.EmailField(
+    email=models.EmailField(max_length=350,
         validators=[
             RegexValidator(
                     regex='^\w.{1,64}@\w.{1,253}\.\w*$',
                     message='EX: address@domain.com',
                     code="Invalid Email Format"
                     )])
-    phone=models.CharField(
+    phone=models.CharField(max_length=16,
         validators=[
             RegexValidator(
                 regex='^(\+?\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$',
@@ -30,12 +30,12 @@ class Location(models.Model):
     address=models.CharField(max_length=100)
     lat=models.FloatField()
     lng=models.FloatField()
-    google_id=models.CharField()
+    google_id=models.CharField(max_length=200)
 
 class Item(models.Model):
     pantry=models.ForeignKey(Pantry, on_delete=models.CASCADE)
     name=models.CharField(max_length=50);
-    best_by=models.models.DateField("Best By", auto_now=False, auto_now_add=False, blank=True)
+    best_by=models.DateField("Best By", auto_now=False, auto_now_add=False, blank=True)
     quantity=models.IntegerField(default=1)
     perishable=models.BooleanField(default=True)
     refrigeration=models.BooleanField(default=False)
