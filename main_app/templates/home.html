@@ -1,19 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <main>
+        <div class="list-container">
 
-    <div>
-        <h1>TEST</h1>
-        <div>
-            {{ user_form.as_p }}
+            <div>
+                <h1>TEST</h1>
+                <div>
+                    {{ user_form.as_p }}
+                </div>
+                <div>
+                    {{ pantry_form.as_p }}
+                    
+                </div>
+                <div>
+                    {{ location_form.as_p }}
+                </div>
+                
+            </div>
         </div>
-        <div>
-            {{ pantry_form.as_p }}
+        <div class="map-container">
 
-        </div>
-        <div>
-            {{ location_form.as_p }}
+            <!--The div element for the map -->
+            <div id="map"></div>
         </div>
 
-    </div>
+        
+    </main>
+
 {% endblock content %}

@@ -6,11 +6,39 @@ body {
   }
   
 main {
-  flex: 1 0 auto;
+    height: calc(100vh - 85px);
+    /* flex: 1 0 auto; */
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.map-container {
+    display: flex;
+    
+    align-items: center;
+}
+
+.list-container {
+
+    overflow: auto;
+}
+
+/* Set the size of the div element that contains the map */
+#map {
+    height: 400px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+
+
+    /* FOR TESTING */
+    border: black;
+    border-style: double;
 }
 
 .brand-logo {
-    margin: -0.2rem 0 0 9px;
+    font-size: 4.1rem;
+    margin: 0.7rem 0 0 9px;
 
 }
 
