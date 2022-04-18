@@ -5,11 +5,37 @@ body {
     flex-direction: column;
   }
   
+.brand-logo {
+    font-size: 72px !important;
+    margin: 0.34rem 0 0 9px;
+
+}
+
+form {
+    display: inline-block;
+    width: 35%;
+    margin: 0 0 0 23.3rem;
+}
+
 main {
-    height: calc(100vh - 85px);
+    height: calc(100vh - 86px);
     /* flex: 1 0 auto; */
     display: grid;
     grid-template-columns: 1fr 2fr;
+}
+
+
+.list-container {
+    
+    overflow: auto;
+}
+
+.card {
+    margin: 0 1rem 1rem 0;
+}
+
+.card-action>* {
+    white-space: nowrap;
 }
 
 .map-container {
@@ -18,10 +44,6 @@ main {
     align-items: center;
 }
 
-.list-container {
-
-    overflow: auto;
-}
 
 /* Set the size of the div element that contains the map */
 #map {
@@ -36,13 +58,9 @@ main {
     border-style: double;
 }
 
-.brand-logo {
-    font-size: 4.1rem;
-    margin: 0.7rem 0 0 9px;
-
-}
 
 footer {
-  padding-top: 0;
-  text-align: right;
+    height: 21px;
+    padding-top: 0;
+    text-align: right;
 }
