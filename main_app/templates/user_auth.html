@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main class="user_auth">
+        <div class="signup-container">
+            <h1>Sign Up</h1>
+            <form action="{% url 'user_auth' %}" method="POST" >
+                {% csrf_token %}
+                {{ signup_form.as_p }}
+                <input type="hidden" name="form" value="signup">
+                <button class="btn waves-effect waves-teal btn-flat" type="submit" name="action">Sign Up
+                    <i class="material-icons right">send</i>
+                  </button>
+            </form>
+                
+        </div>
+
+        <div class="login-container">
+            <h1>Login</h1>
+            <form action="{% url 'user_auth' %}" method="POST">
+                {% csrf_token %}
+                {{ login_form.as_p }}
+                <input type="hidden" name="form" value="login">
+                <button class="btn waves-effect waves-teal btn-flat" type="submit" name="action">Login
+                    <i class="material-icons right">send</i>
+                    </button> 
+            </form>
+
+        </div>
+        
+
+        
+    </main>
+
+{% endblock content %}

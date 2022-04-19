@@ -11,19 +11,22 @@ body {
 
 }
 
-form {
-    display: inline-block;
-    width: 35%;
-    margin: 0 0 0 23.3rem;
-}
-
 main {
     height: calc(100vh - 86px);
     /* flex: 1 0 auto; */
     display: grid;
+}
+
+/*================home.html */
+main.home {
     grid-template-columns: 1fr 2fr;
 }
 
+.searchbar {
+    display: inline-block;
+    width: 35%;
+    margin: 0 0 0 23.3rem;
+}
 
 .list-container {
     
@@ -44,6 +47,20 @@ main {
     align-items: center;
 }
 
+/*================user_auth.html */
+main.user_auth {
+    grid-template-columns: 1fr 1fr;
+}
+
+.signup-container {
+    margin: auto;
+    padding: 5%;
+}
+
+.login-container {
+    margin: 26% 5%;
+    padding: 5%;
+}
 
 /* Set the size of the div element that contains the map */
 #map {

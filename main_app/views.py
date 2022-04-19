@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from multiprocessing import context
+from django.shortcuts import redirect, render
 from user_app.forms import User_Form
 from .forms import Pantry_Form, Location_Form
+
+from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 
 def home(request):
@@ -9,6 +12,36 @@ def home(request):
     location_form = Location_Form
     context = {'pantries': pantries,'user_form': user_form, 'pantry_form': pantry_form, 'location_form': location_form}
     return render(request,'home.html', context)
+
+def user_auth(request):
+    signup_form = User_Form
+    login_form = AuthenticationForm
+
+    if request.method == 'POST':
+        print(request.POST)
+        if request.POST.__getitem__('form') == 'signup':
+            auth_form = User_Form(data=request.POST)
+            if auth_form.is_valid():
+                #TODO save; go to pantry form
+                print('valid')
+                return render(request, 'user_auth.html')
+            else:
+                context = {'signup_form': auth_form, 'login_form': login_form}
+                return render(request,'user_auth.html', context)
+        if request.POST.__getitem__('form') == 'login':
+            print(request.POST)
+            auth_form = AuthenticationForm(data=request.POST)
+            if auth_form.is_valid():
+                #TODO authenticate; login; go to profile
+                print('valid')
+                return render(request, 'user_auth.html')
+            else:
+                context = {'signup_form': signup_form, 'login_form': auth_form}
+                return render(request,'user_auth.html', context)
+    else:
+        context = {'signup_form': signup_form, 'login_form': login_form}
+        return render(request,'user_auth.html', context)
+
 
 class Location:
 
