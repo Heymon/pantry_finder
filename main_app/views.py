@@ -24,7 +24,9 @@ def user_auth(request):
             if auth_form.is_valid():
                 #TODO save; go to pantry form
                 print('valid')
-                return render(request, 'user_auth.html')
+                pantry_form = Pantry_Form
+                context = {'user_info': auth_form, 'pantry_form': pantry_form}
+                return render(request, 'pantry_creation.html', context)
             else:
                 context = {'signup_form': auth_form, 'login_form': login_form}
                 return render(request,'user_auth.html', context)
@@ -42,6 +44,9 @@ def user_auth(request):
         context = {'signup_form': signup_form, 'login_form': login_form}
         return render(request,'user_auth.html', context)
 
+
+# def pantry_creation(request):
+#     return redirect('home')
 
 class Location:
 
