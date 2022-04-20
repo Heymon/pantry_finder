@@ -29,6 +29,18 @@ function initMap() {
 
 const setPantryLocation = (inputEl, placeResult)=>{
     inputEl.value = placeResult.formatted_address;
+
+    let addressEl = document.querySelector("input[name='address']");
+    let googleIdEl = document.querySelector("input[name='googleId']");
+    let latEl = document.querySelector("input[name='lat']");
+    let lngEl = document.querySelector("input[name='lng']");
+
+    addressEl.value = placeResult.formatted_address;
+    googleIdEl.value = placeResult.place_id;
+    latEl.value = placeResult.geometry.location.lat;
+    lngEl.value = placeResult.geometry.location.lng;
+
+
     console.log(placeResult)
 
 }
@@ -64,7 +76,7 @@ const geocodeSearch = (map, inputEl, query)=> {
 
 function initializeAutocomplete(map) {
 
-    let searchInputEl = document.querySelector("input[name='address']");
+    let searchInputEl = document.querySelector("input[name='address-search']");
     console.log(searchInputEl);
 
     const autocomplete = new google.maps.places.Autocomplete(searchInputEl, {

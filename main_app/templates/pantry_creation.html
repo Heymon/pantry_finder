@@ -6,15 +6,37 @@
             <h1>Pantry Imformation Form</h1>
             <div class="input-field col s6">
                 <i class="material-icons prefix">edit_location</i>
-                <input type="text" name="address" maxlength="50" required="" id="icon_prefix2">
+                <input type="text" name="address-search" maxlength="50" required="" id="icon_prefix2">
                 <label for="icon_prefix2">Address</label>
             </div>
         </div>
         <div class="col s6">
-            <form action="{% url 'home' %}" method="POST" >
+            <form action="{% url 'pantry_creation' 1 %}" method="POST" >
                 {% csrf_token %}
-                {{ pantry_form.as_p }}
-                {% comment %} <input type="hidden" name="form" value="signup"> {% endcomment %}
+                {% comment %} {{ pantry_form.as_p }} {% endcomment %}
+                <div class="input-field">{{pantry_form.name.label_tag}} {{pantry_form.name}}</div>
+                {% if pantry_form.name.errors %}
+                    {{pantry_form.name.errors}}
+                {% endif %}
+                <div class="input-field">{{pantry_form.email.label_tag}} {{pantry_form.email}}</div>
+                {% if pantry_form.email.errors %}
+                    {{pantry_form.email.errors}}
+                {% endif %}
+                <div class="input-field">{{pantry_form.phone.label_tag}} {{pantry_form.phone}}</div>
+                {% if pantry_form.phone.errors %}
+                    {{pantry_form.phone.errors}}
+                {% endif %}
+                <div class="input-field">{{pantry_form.description.label_tag}} {{pantry_form.description}}</div>
+                {% if pantry_form.description.errors %}
+                    {{pantry_form.description.errors}}
+                {% endif %}
+                
+                {% comment %} TODO test values change to empty later {% endcomment %}
+                <input type="hidden" name="address" value="UCSF Osher Building, 1545 Divisadero St, San Francisco, CA 94115, USA">
+                <input type="hidden" name="lat" value=37.4224428>
+                <input type="hidden" name="lng" value=-122.0842467>
+                <input type="hidden" name="google_id" value="ChIJjWrBFraAhYARnvAZlhAPUtU">
+
                 <button class="btn waves-effect waves-teal btn-flat" type="submit" name="action">Create Pantry
                     <i class="material-icons right">send</i>
                     </button>

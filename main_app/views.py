@@ -1,4 +1,5 @@
 from multiprocessing import context
+from django.http import QueryDict
 from django.shortcuts import redirect, render
 from user_app.forms import User_Form
 from .forms import Pantry_Form, Location_Form
@@ -24,9 +25,7 @@ def user_auth(request):
             if auth_form.is_valid():
                 #TODO save; go to pantry form
                 print('valid')
-                pantry_form = Pantry_Form
-                context = {'user_info': auth_form, 'pantry_form': pantry_form}
-                return render(request, 'pantry_creation.html', context)
+                return redirect('pantry_creation', user_id=1)
             else:
                 context = {'signup_form': auth_form, 'login_form': login_form}
                 return render(request,'user_auth.html', context)
@@ -45,8 +44,29 @@ def user_auth(request):
         return render(request,'user_auth.html', context)
 
 
-# def pantry_creation(request):
-#     return redirect('home')
+def pantry_creation(request, user_id):
+
+    pantry_form = Pantry_Form
+    location_form = Location_Form
+
+    # TODO if connection break or closed delete user thru user_id
+
+    if request.method == 'POST':
+        mutable_post = request.POST.copy()
+        location = QueryDict(f'address={mutable_post.pop("address")[0]}&google_id={mutable_post.pop("google_id")[0]}&lat={mutable_post.pop("lat")[0]}&lng={mutable_post.pop("lng")[0]}')
+
+        pantry_form = Pantry_Form(mutable_post)
+        location_form = Location_Form(location)
+        if pantry_form.is_valid() and location_form.is_valid():
+            print('valid')
+            return redirect('user_auth')
+        else:
+            context = {'pantry_form': pantry_form, 'location_form': location_form}
+            return render(request, 'pantry_creation.html', context)
+    else:
+        context = {'pantry_form': pantry_form, 'location_form': location_form}
+        return render(request, 'pantry_creation.html', context)
+
 
 class Location:
 

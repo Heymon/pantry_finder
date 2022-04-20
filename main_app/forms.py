@@ -14,4 +14,4 @@ class Location_Form(ModelForm):
     class Meta:
         model= Location
         labels= {'address':'Location Address'}
-        fields = ['address']
+        fields = ['address', 'lat', 'lng', 'google_id']

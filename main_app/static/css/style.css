@@ -69,6 +69,16 @@ main.pantry_creation {
     display: block;
 }
 
+.input-field {
+    margin-bottom: 0;
+}
+
+.errorlist {
+    color: red;
+    margin-top: 0;
+    margin-bottom: 26.5px;
+}
+
 /* Set the size of the div element that contains the map */
 #map {
     height: 400px;
