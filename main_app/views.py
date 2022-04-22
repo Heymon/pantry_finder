@@ -1,8 +1,12 @@
 from multiprocessing import context
 from django.http import QueryDict
 from django.shortcuts import redirect, render
+
+# =============FORMS & MODELS=================
 from user_app.forms import User_Form
+from user_app.models import User
 from .forms import Pantry_Form, Location_Form
+from .models import Pantry, Location
 
 from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
@@ -25,7 +29,8 @@ def user_auth(request):
             if auth_form.is_valid():
                 #TODO save; go to pantry form
                 print('valid')
-                return redirect('pantry_creation', user_id=1)
+                user = auth_form.save()
+                return redirect('pantry_creation', user_id=user.id)
             else:
                 context = {'signup_form': auth_form, 'login_form': login_form}
                 return render(request,'user_auth.html', context)
@@ -53,18 +58,27 @@ def pantry_creation(request, user_id):
 
     if request.method == 'POST':
         mutable_post = request.POST.copy()
-        location = QueryDict(f'address={mutable_post.pop("address")[0]}&google_id={mutable_post.pop("google_id")[0]}&lat={mutable_post.pop("lat")[0]}&lng={mutable_post.pop("lng")[0]}')
+        location_query = QueryDict(f'address={mutable_post.pop("address")[0]}&google_id={mutable_post.pop("google_id")[0]}&lat={mutable_post.pop("lat")[0]}&lng={mutable_post.pop("lng")[0]}')
 
         pantry_form = Pantry_Form(mutable_post)
-        location_form = Location_Form(location)
+        location_form = Location_Form(location_query)
         if pantry_form.is_valid() and location_form.is_valid():
             print('valid')
-            return redirect('user_auth')
+            pantry = pantry_form.save(commit=False)
+            print('valid2')
+            pantry.user = User.objects.get(id=user_id)
+            pantry.save()
+            print('valid3')
+            location = location_form.save(commit=False)
+            location.pantry = pantry
+            location.save()
+
+            return redirect('user_auth')#change to pantry profile
         else:
-            context = {'pantry_form': pantry_form, 'location_form': location_form}
+            context = {'pantry_form': pantry_form, 'location_form': location_form, 'user_id': user_id}
             return render(request, 'pantry_creation.html', context)
     else:
-        context = {'pantry_form': pantry_form, 'location_form': location_form}
+        context = {'pantry_form': pantry_form, 'location_form': location_form, 'user_id': user_id}
         return render(request, 'pantry_creation.html', context)
 
 

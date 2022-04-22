@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="col s6">
-            <form action="{% url 'pantry_creation' 1 %}" method="POST" >
+            <form action="{% url 'pantry_creation' user_id %}" method="POST" >
                 {% csrf_token %}
                 {% comment %} {{ pantry_form.as_p }} {% endcomment %}
                 <div class="input-field">{{pantry_form.name.label_tag}} {{pantry_form.name}}</div>
