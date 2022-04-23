@@ -1,3 +1,4 @@
+from django import forms
 from main_app.models import Pantry, Location, Item
 from django.forms import ModelForm
 
@@ -13,5 +14,17 @@ class Location_Form(ModelForm):
     
     class Meta:
         model= Location
-        labels= {'address':'Location Address'}
+        # labels= {'address':'Location Address'}
         fields = ['address', 'lat', 'lng', 'google_id']
+
+class Item_Form(ModelForm):
+
+    perishable = forms.CheckboxInput()
+    refrigeration = forms.CheckboxInput()
+    has_item = forms.CheckboxInput()
+
+
+    class Meta:
+        model= Item
+        labels= {'name': 'Item Name', 'best_by': 'Best by Date', 'quantity': 'Quantity', 'perishable': 'Is it Perishable', 'refrigeration': 'Is refrigerable', 'has_item': 'Needed?', 'keywords': 'Keywords'}
+        fields = ['name', 'best_by', 'quantity', 'perishable', 'refrigeration', 'has_item', 'keywords']

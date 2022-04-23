@@ -8,7 +8,7 @@
 
                 <div class="card blue-grey darken-1">
                     <div id = "{{ pantry.id }}" data-selected = "false" class="card-content white-text">
-                        <span class="card-title">{{ pantry.title }} <span>{{ pantry.wrk_hrs }}</span></span>
+                        <span class="card-title">{{ pantry.name }} <span>{{ pantry.wrk_hrs }}</span></span>
     
                         <p class="card-address" data-lat= {{ pantry.location.lat }} data-lng= {{ pantry.location.lng }}>{{ pantry.location.address }}</p>
                         <p>{{ pantry.description }}</p>
@@ -16,8 +16,8 @@
                     <div class="card-action">
                         <a href="#">Pantry Items</a>
                         <a href="https://www.google.com/maps/dir//" target="_blank" rel="noopener noreferrer">Directions</a>
-                        <a href="#">{{ pantry.contact }}</a>
-                        <a href="#">EMAIL@MAIL.COM</a>
+                        <a href="#">{{ pantry.phone }}</a>
+                        <a href="#">{{ pantry.email }}</a>
                     </div>
                 </div>
                 

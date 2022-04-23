@@ -8,7 +8,6 @@ from django.core.validators import RegexValidator
 # Create your models here.
 
 class Pantry(models.Model):
-
     user=models.OneToOneField(User, on_delete=models.CASCADE)
     name=models.CharField(max_length=50, unique=True)
     email=models.EmailField(max_length=350,
