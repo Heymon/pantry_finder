@@ -10,6 +10,7 @@ from .forms import Pantry_Form, Location_Form, Item_Form
 from .models import Pantry, Location, Item
 
 # =============AUTH==========
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 # Create your views here.
@@ -23,6 +24,8 @@ def home(request):
     return render(request,'home.html', context)
 
 def user_auth(request):
+    if request.user.is_authenticated:
+        return redirect('edit_profile')
     signup_form = User_Form
     login_form = AuthenticationForm
 
@@ -55,7 +58,7 @@ def user_auth(request):
         context = {'signup_form': signup_form, 'login_form': login_form}
         return render(request,'user_auth.html', context)
 
-
+@login_required
 def pantry_creation(request, user_id):
 
     pantry_form = Pantry_Form
@@ -88,7 +91,7 @@ def pantry_creation(request, user_id):
         context = {'pantry_form': pantry_form, 'location_form': location_form, 'user_id': user_id}
         return render(request, 'pantry_creation.html', context)
 
-
+@login_required
 def edit_profile(request):
     if request.POST:
         pantry = Pantry.objects.get(user=request.user)
