@@ -23,6 +23,13 @@ def home(request):
     context = {'pantries': pantries,'user_form': user_form, 'pantry_form': pantry_form, 'location_form': location_form}
     return render(request,'home.html', context)
 
+def pantry_view(request, pantry_id):
+    pantry = Pantry.objects.get(id=pantry_id)
+    current_items = pantry.item_set.filter(has_item=True)
+    requested_items = pantry.item_set.filter(has_item=False)
+    context = { 'pantry': pantry, 'current_items': current_items, 'requested_items': requested_items}
+    return render(request, 'pantry_view.html', context)
+
 def user_auth(request):
     if request.user.is_authenticated:
         return redirect('edit_profile')

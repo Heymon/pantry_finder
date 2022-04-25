@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main class="pantry_creation row">
+        <div class="col s12">
+
+            <div class="card blue-grey darken-1">
+                <div id = "{{ pantry.id }}" data-selected = "false" class="card-content white-text">
+                    <span class="card-title">{{ pantry.name }} <span>{{ pantry.wrk_hrs }}</span></span>
+
+                    <p class="card-address" data-lat= {{ pantry.location.lat }} data-lng= {{ pantry.location.lng }}>{{ pantry.location.address }}</p>
+                    {% comment %} <p>{{ pantry.description }}</p> {% endcomment %}
+                </div>
+                <div class="card-action">
+                    {% comment %} <a href="{% url 'pantry_view' pantry.id %}">Pantry Items</a> {% endcomment %}
+                    <a href="https://www.google.com/maps/dir//" target="_blank" rel="noopener noreferrer">Directions</a>
+                    <a href="#">{{ pantry.phone }}</a>
+                    <a href="#">{{ pantry.email }}</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="col s6">
+            <h3>Currrent Items</h3>
+            <ul>
+                {% for item in current_items %}
+
+                    <li>{{ item.name }}</li>
+
+                {% empty %}
+
+                    <li><p>Sorry, this pantry is empty at the moment.</p></li>
+                    
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col s6">
+            <h3>Requested Items</h3>
+            <ul>
+                {% for item in rquested_items %}
+
+                    <li>{{ item.name }}</li>
+
+                {% empty %}
+
+                    <li><p>This pantry has no current requests. All food items are welcomed.</p></li>
+                    
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col s12">
+
+            <div class="card blue-grey darken-1">
+                <div id="card-info" data-selected = "false" class="card-content white-text">
+                    <span class="card-title"> INFO <span>{{ pantry.wrk_hrs }}</span></span>
+
+                    {% comment %} <p class="card-address" data-lat= {{ pantry.location.lat }} data-lng= {{ pantry.location.lng }}>{{ pantry.location.address }}</p> {% endcomment %}
+                    <p>{{ pantry.description }}</p>
+                </div>
+                {% comment %} <div class="card-action">
+                    <a href="{% url 'pantry_view' pantry.id %}">Pantry Items</a>
+                    <a href="https://www.google.com/maps/dir//" target="_blank" rel="noopener noreferrer">Directions</a>
+                    <a href="#">{{ pantry.phone }}</a>
+                    <a href="#">{{ pantry.email }}</a>
+                </div> {% endcomment %}
+            </div>
+
+        </div>
+    </main>
+
+
+{% endblock content %}

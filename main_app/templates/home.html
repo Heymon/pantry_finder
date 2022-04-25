@@ -14,7 +14,7 @@
                         <p>{{ pantry.description }}</p>
                     </div>
                     <div class="card-action">
-                        <a href="#">Pantry Items</a>
+                        <a href="{% url 'pantry_view' pantry.id %}">Pantry Items</a>
                         <a href="https://www.google.com/maps/dir//" target="_blank" rel="noopener noreferrer">Directions</a>
                         <a href="#">{{ pantry.phone }}</a>
                         <a href="#">{{ pantry.email }}</a>

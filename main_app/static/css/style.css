@@ -48,6 +48,12 @@ main.home {
     align-items: center;
 }
 
+/*================pantry_view.html */
+
+#card-info>p {
+    white-space: pre-wrap;
+}
+
 /*================user_auth.html */
 main.user_auth {
     grid-template-columns: 1fr 1fr;
