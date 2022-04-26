@@ -40,7 +40,7 @@ class Item(models.Model):
     quantity=models.IntegerField(default=1)
     perishable=models.BooleanField(default=True)
     refrigeration=models.BooleanField(default=False)
-    has_item=models.BooleanField(default=True)
+    is_requested=models.BooleanField(default=False)
     keywords=models.TextField(max_length=300, blank=True)
     # keywords=ArrayField(base_field=models.CharField(max_length=10)
 

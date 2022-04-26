@@ -100,14 +100,26 @@ def pantry_creation(request, user_id):
 
 @login_required
 def edit_profile(request):
-    if request.POST:
-        pantry = Pantry.objects.get(user=request.user)
-        pantry_edit = Pantry_Form(request.POST, instance=pantry)
-        pantry_form = pantry_edit
-        if pantry_form.is_valid():
-            print(pantry_form)
-            pantry_form.save()
-    else:
+    item_log = False
+    item_form = Item_Form()
+    if request.method == 'POST':
+        if request.POST.__contains__('best_by'):
+            item_log = True
+            item_form = Item_Form(request.POST)
+            if item_form.is_valid():
+                item = item_form.save(commit=False)
+                print(request.user.pantry)
+                item.pantry=request.user.pantry
+        elif request.POST.__contains__('phone'):
+            # item_form = Item_Form()
+            pantry = Pantry.objects.get(user=request.user)
+            pantry_edit = Pantry_Form(request.POST, instance=pantry)
+            pantry_form = pantry_edit
+            if pantry_form.is_valid():
+                print(pantry_form)
+                pantry_form.save()
+
+    if request.method == 'GET' or item_log:
         pantry = Pantry.objects.get(user=request.user)
         query_pantry = QueryDict('', mutable=True)
         dict_pantry = model_to_dict(pantry)
@@ -115,7 +127,7 @@ def edit_profile(request):
         pantry_form = Pantry_Form(query_pantry, instance=pantry)
         print(pantry_form)
 
-    item_form = Item_Form()
+    
     items = pantry.item_set.all()
     context = {'pantry': pantry, 'pantry_form': pantry_form, 'item_form': item_form, 'items': items}
     return render(request, 'edit_profile.html', context)

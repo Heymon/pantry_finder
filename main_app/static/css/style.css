@@ -74,7 +74,16 @@ main.pantry_creation {
     /* grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 3fr; */
     display: block;
+    height: fit-content;
 }
+
+.hasitem-input {
+    display: grid;
+}
+
+/* .help-text {
+
+} */
 
 .input-field {
     margin-bottom: 0;

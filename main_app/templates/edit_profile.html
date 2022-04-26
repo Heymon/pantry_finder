@@ -34,9 +34,48 @@
             <h3>Add Item</h3>
             <form action="{% url 'edit_profile' %}" method="POST">
                 {% csrf_token %}
-                {{ item_form.as_p }}
+                {% comment %} {{ item_form.as_p }} {% endcomment %}
 
-                <button class="btn waves-effect waves-teal btn-flat" type="submit" name="action">Edit Pantry
+                {% csrf_token %}
+                <p>
+                    <label class="hasitem-input"> Add this Item to the requested items?
+                      {{ item_form.is_requested}}
+                      <span></span>
+                    </label>
+                </p>
+                <p class="help-text">{{ item_form.is_requested.help_text }}</p>
+
+                <div class="input-field">{{item_form.name.label_tag}} {{item_form.name}}</div>
+                {% if item_form.name.errors %}
+                    {{item_form.name.errors}}
+                {% endif %}
+                <div class="input-field">{{item_form.best_by.label_tag}} {{item_form.best_by}}</div>
+                {% if item_form.best_by.errors %}
+                    {{item_form.best_by.errors}}
+                {% endif %}
+                <div class="input-field">{{item_form.quantity.label_tag}} {{item_form.quantity}}</div>
+                {% if item_form.quantity.errors %}
+                    {{item_form.quantity.errors}}
+                {% endif %}
+                <p>
+                    <label>
+                      {{ item_form.refrigeration}}
+                      <span>{{ item_form.refrigeration.label }}</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                      {{ item_form.perishable}}
+                      <span>{{ item_form.perishable.label }}</span>
+                    </label>
+                </p>
+                
+                <div class="input-field">{{item_form.keywords.label_tag}} {{item_form.keywords}}</div>
+                {% if item_form.keywords.errors %}
+                    {{item_form.keywords.errors}}
+                {% endif %}
+
+                <button class="btn waves-effect waves-teal btn-flat" type="submit" name="action">Add Item
                     <i class="material-icons right">send</i>
                 </button>
             </form>

@@ -26,5 +26,6 @@ class Item_Form(ModelForm):
 
     class Meta:
         model= Item
-        labels= {'name': 'Item Name', 'best_by': 'Best by Date', 'quantity': 'Quantity', 'perishable': 'Is it Perishable', 'refrigeration': 'Is refrigerable', 'has_item': 'Needed?', 'keywords': 'Keywords'}
-        fields = ['name', 'best_by', 'quantity', 'perishable', 'refrigeration', 'has_item', 'keywords']
+        help_texts= {'is_requested': 'Current Items are items donated to the pantry.\nRequested Items are items the pantry needs the most rigth now.'}
+        labels= {'name': 'Item Name', 'best_by': 'Best by Date', 'quantity': 'Quantity', 'perishable': 'Is it Perishable?', 'refrigeration': 'Is Refrigeration needed?', 'is_requested': 'Needed?', 'keywords': 'Keywords'}
+        fields = ['name', 'best_by', 'quantity', 'perishable', 'refrigeration', 'is_requested', 'keywords']
